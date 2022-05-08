@@ -28,7 +28,7 @@ jobs:
            distribution: 'temurin'
            java-version: '8'
       - name: Build java app
-        run: ./mvnw clean package
+        run: ./mvnw clean install
       
       - name: Log in to Docker Hub
         uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
