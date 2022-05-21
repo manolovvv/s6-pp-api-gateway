@@ -16,7 +16,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        String url = String.format("localhost:8081/getOneByEmail/%s",email);
+        String url = String.format("http://10.108.15.50:8081/getOneByEmail/%s",email);
         User user = webClientBuilder
                 .build()
                 .get()
