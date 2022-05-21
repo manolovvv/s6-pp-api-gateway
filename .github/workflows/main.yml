@@ -42,7 +42,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
            distribution: 'temurin'
-           java-version: '11'
+           java-version: '8'
 
       - name: Analyze with SonarCloud
         run: ./mvnw -B verify sonar:sonar -Dsonar.projectKey=s6-pp-api-gateway -Dsonar.organization=manolovvv -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
