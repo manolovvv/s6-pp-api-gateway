@@ -60,9 +60,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 // Blacklisted routes
                 .antMatchers(HttpMethod.POST,"/api/post-service/*").access("hasAuthority('USER')")
-                .antMatchers(HttpMethod.POST,"/api/post-service/deletepost/*").access("hasAuthority('ADMIN')")
+                .antMatchers(HttpMethod.DELETE,"/api/post-service/deletepost/*").access("hasAuthority('ADMIN')")
                 .antMatchers(HttpMethod.POST,"/api/post-service/addcomment/*").access("hasAuthority('USER')")
-                .antMatchers(HttpMethod.POST,"/api/post-service/deletecomment/*").access("hasAuthority('ADMIN')")
+                .antMatchers(HttpMethod.DELETE,"/api/post-service/deletecomment/*").access("hasAuthority('ADMIN')")
 
 
                 // Whitelisted routes
