@@ -2,6 +2,7 @@ package com.gateway.security;
 
 import com.gateway.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,7 +17,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        String url = String.format("http://10.108.15.50:8081/getOneByEmail/%s",email);
+        String url = String.format("http://localhost:8081/getOneByEmail/%s",email);
         User user = webClientBuilder
                 .build()
                 .get()

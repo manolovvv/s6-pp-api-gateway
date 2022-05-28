@@ -72,7 +72,7 @@ public class ZuulConfiguration {
 
     }
 
-    private static enum LookupHandlerCallbackFilter implements CallbackFilter {
+    private enum LookupHandlerCallbackFilter implements CallbackFilter {
 
         INSTANCE;
 
@@ -86,7 +86,7 @@ public class ZuulConfiguration {
 
     }
 
-    private static enum LookupHandlerMethodInterceptor implements MethodInterceptor {
+    private enum LookupHandlerMethodInterceptor implements MethodInterceptor {
 
         INSTANCE;
 

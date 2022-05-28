@@ -17,6 +17,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -35,6 +38,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public CorsFilter corsFilter() {
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        final CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.addAllowedOrigin("*");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("OPTIONS");
+        config.addAllowedMethod("HEAD");
+        config.addAllowedMethod("GET");
+        config.addAllowedMethod("PUT");
+        config.addAllowedMethod("POST");
+        config.addAllowedMethod("DELETE");
+        source.registerCorsConfiguration("/**", config);
+        return new CorsFilter(source);
     }
 
     @Override
@@ -63,11 +83,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.DELETE,"/api/post-service/deletepost/*").access("hasAuthority('ADMIN')")
                 .antMatchers(HttpMethod.POST,"/api/post-service/addcomment/*").access("hasAuthority('USER')")
                 .antMatchers(HttpMethod.DELETE,"/api/post-service/deletecomment/*").access("hasAuthority('ADMIN')")
+                .antMatchers(HttpMethod.DELETE,"/api/user-details-service/*").access("hasAuthority('USER')")
 
 
                 // Whitelisted routes
                 .antMatchers("/api/auth-service/*").permitAll()
                 .antMatchers("/api/auth-service/getpost/*").permitAll()
+                .antMatchers(HttpMethod.POST,"/api/user-details-service/*").permitAll()
+                .antMatchers(HttpMethod.GET,"/api/user-details-service/*").permitAll()
                 .antMatchers("/api/auth-service/getbycategory/*").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/post-service/").permitAll().and().
                 // make sure we use stateless session; session won't be used to
