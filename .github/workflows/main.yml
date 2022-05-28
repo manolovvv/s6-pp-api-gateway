@@ -58,7 +58,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=manolovvv_s6-pp-auth-service
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=manolovvv_s6-pp-api-gateway
            
       - name: Build java app
         run: ./mvnw clean package
@@ -69,7 +69,7 @@ jobs:
         run: |
           gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
           gcloud auth configure-docker europe-docker.pkg.dev
-          docker build -t europe-docker.pkg.dev/kalve-349610/kalve/api-gateway:latest .
-          docker image push europe-docker.pkg.dev/kalve-349610/kalve/api-gateway:latest
+          docker build -t europe-west4-docker.pkg.dev/thematic-mapper-351607/kalve/api-gateway:latest .
+          docker image push europe-west4-docker.pkg.dev/thematic-mapper-351607/kalve/api-gateway:latest
         
         
