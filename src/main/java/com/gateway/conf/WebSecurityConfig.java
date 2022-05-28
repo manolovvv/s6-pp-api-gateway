@@ -84,6 +84,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST,"/api/post-service/addcomment/*").access("hasAuthority('USER')")
                 .antMatchers(HttpMethod.DELETE,"/api/post-service/deletecomment/*").access("hasAuthority('ADMIN')")
                 .antMatchers(HttpMethod.DELETE,"/api/user-details-service/*").access("hasAuthority('USER')")
+                .antMatchers(HttpMethod.DELETE, "/api/user-details-service/*").access("hasAuthority('ADMIN')")
+
 
 
                 // Whitelisted routes
