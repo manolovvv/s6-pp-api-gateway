@@ -83,17 +83,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST,"/api/post-service/addcomment/*").access("hasAuthority('USER')")
                 .antMatchers(HttpMethod.DELETE,"/api/post-service/deletecomment/*").access("hasAuthority('ADMIN')")
                 .antMatchers(HttpMethod.DELETE,"/api/user-details-service/*").access("hasAuthority('USER')")
-                .antMatchers(HttpMethod.DELETE, "/api/user-details-service/*").access("hasAuthority('ADMIN')")
-
-
+                .antMatchers("/api/auth-service/getpost/*").authenticated()
+                .antMatchers(HttpMethod.GET,"/api/user-details-service/*").authenticated()
+                .antMatchers("/api/auth-service/getbycategory/*").authenticated()
+                .antMatchers(HttpMethod.GET,"/api/post-service/").authenticated()
 
                 // Whitelisted routes
                 .antMatchers("/api/auth-service/*").permitAll()
-                .antMatchers("/api/auth-service/getpost/*").permitAll()
-                .antMatchers(HttpMethod.POST,"/api/user-details-service/*").permitAll()
-                .antMatchers(HttpMethod.GET,"/api/user-details-service/*").permitAll()
-                .antMatchers("/api/auth-service/getbycategory/*").permitAll()
-                .antMatchers(HttpMethod.GET,"/api/post-service/").permitAll().and().
+                .antMatchers(HttpMethod.POST,"/api/user-details-service/*").permitAll().and().
+
                 // make sure we use stateless session; session won't be used to
                 // store user's state.
                         exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
