@@ -90,7 +90,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 // Whitelisted routes
                 .antMatchers("/api/auth-service/*").permitAll()
-                .antMatchers(HttpMethod.POST,"/api/user-details-service/*").permitAll().and().
+                .antMatchers(HttpMethod.POST,"/api/user-details-service/").permitAll().and().
 
                 // make sure we use stateless session; session won't be used to
                 // store user's state.
